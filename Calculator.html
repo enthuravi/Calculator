@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang='en' dir='ltr'>
+<head>
+<title>Calculator</title>
+<meta name='viewport' content ="width=device-width, initial-scale=1.0">
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+*{margin:0; padding:0; box-sizing:border-box;
+	font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;}
+*::marker{background-color:rgba(0,0,0,0);}
+
+html,body{width:100%; height:100%;
+body{display:flex;
+	justify-content: center;
+	align-items:center;
+	background:linear-gradient(45deg, #0a0a0a, #3a4452);}
+
+.container{box-shadow:3px 3px 15px rgba(113,115,117,0.5);
+	color:white; width:90vw; height:90dvh;
+	border-radius:16px; border:1px solid #717377;
+	margin:5dvh 0 0 0; padding:20px;
+	display:flex; justify-content:space-around;
+	flex-direction:column;}
+
+.container>div{display:flex; justify-content:space-around;}
+input{width:100%; 
+	padding:24px; border:none;
+	margin: 0px;
+	background:rgba(0,0,0,0.1); font-size:40px; text-align:right;
+	box-shadow: 0 3px 15px rgba(84,84,84,0.1); color:white;
+	border-radius:16px;}
+input::placeholder{color:white;}
+input:focus, input:hover, input:focus-visible{border:none; outline:none;}
+button{width:50px; height:50px; border:none; 
+	margin:10px; border-radius:50%; background:transparent;
+	color:#ffffff; font-size:20px;
+	box-shadow:-4px -4px 15px rgba(255,255,255,0.1);
+	curson:pointer;}
+.equalBtn{background:#fb7c14;}
+.operator{color:#6dee0a;}
+
+@media only screen and (min-width: 720px){
+.container{width:54vh; height:96vh; margin:0;}
+button{width:8dvh; height:8dvh;} }
+</style>
+
+</head>
+<body>
+<div class="container">
+<input type="text" placeholder="0" readonly>
+<div>
+<button class="operator">AC</button>
+<button class="operator">DEL</button>
+<button class="operator">%</button>
+<button class="operator">/</button>
+</div>
+<div>
+<button>7</button>
+<button>8</button>
+<button>9</button>
+<button class="operator">*</button>
+</div>
+<div>
+<button>4</button>
+<button>5</button>
+<button>6</button>
+<button class="operator">-</button>
+</div>
+<div>
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<button class="operator">+</button>
+</div>
+
+<div>
+<button>00</button>
+<button>0</button>
+<button>.</button>
+<button class="equalBtn">=</button>
+</div>
+</div>
+
+<script>
+var input=document.querySelector('input');
+let buttons= document.querySelectorAll('button');
+
+let string = "";
+let arr = Array.from(buttons);
+arr.forEach(button =>{
+	button.addEventListener('click',(e) =>{
+	if(e.target.innerHTML == '='){
+		string=eval(string).toString();
+		input.value = string;}
+	else if(e.target.innerHTML =='AC'){
+		string = '';
+		input.value= string;}
+	else if(e.target.innerHTML =='DEL'){
+		string=string.substring(0,string.length-1);
+		input.value = string;}
+	else{
+		if(['%','/','*','+','-'].includes(e.target.innerHTML) && ['%','/','*','+','-'].includes(string.substring(string.length-1))){
+			string = string.substring(0,string.length-1);}
+	string += e.target.innerHTML;
+	input.value = string;}})
+	})
+</script>
+</body>
+</html>
